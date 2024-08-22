@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Perfil</title>
+    <style>
+        body {
+            background-color: white;
+            color: black;
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        .content {
+            padding: 20px;
+        }
+        .comentarios {
+            margin-top: 20px;
+        }
+        .comentario {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    {% csrf_token %}
+    <div class="header">
+        <h1>Perfil de {{ perfil.user.username }}</h1>
+    </div>
+    <div class="content">
+        <h2>Últimos Comentários</h2>
+        <div class="comentarios">
+            {% for comentario in comentarios %}
+                <div class="comentario">
+                    <p><strong>Notícia:</strong> {{ comentario.news.title }}</p>
+                    <p>{{ comentario.comment }}</p>
+                    <p><small>{{ comentario.created_at }}</small></p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

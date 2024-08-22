@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Estilo geral para os cartões */
+        .card {
+            display: flex; /* Garante que o conteúdo do cartão se comporte como um flex container */
+            flex-direction: column; /* Faz com que o conteúdo do cartão se empilhe verticalmente */
+            height: 300px; /* Define uma altura fixa para todos os cartões */
+            width: 100%; /* Ajusta a largura dos cartões para preencher o contêiner */
+            max-width: 400px; /* Define uma largura máxima para os cartões */
+            margin-bottom: 20px; /* Espaço inferior entre os cartões */
+            overflow: hidden; /* Garante que o conteúdo não vaze fora do cartão */
+            transition: transform 0.2s; /* Efeito de transição suave para o hover */
+        }
+
+        /* Efeito de hover para o cartão */
+        .card:hover {
+            transform: scale(1.02); /* Aumenta ligeiramente o tamanho do cartão ao passar o mouse */
+        }
+
+        /* Estilo para as imagens do cartão */
+        .card-img, .card-img-top {
+            width: 100%; /* Faz com que a imagem ocupe toda a largura do contêiner do cartão */
+            object-fit: cover; /* Faz com que a imagem cubra o contêiner sem distorção */
+        }
+
+        /* Estilo para o cartão principal */
+        .main-card {
+            height: 450px; /* Altura maior para o cartão principal */
+        }
+
+        /* Estilo para a imagem do cartão principal */
+        .main-card .card-img-top {
+            height: 300px; /* Altura fixa para a imagem principal */
+        }
+
+        /* Estilo para os cartões laterais */
+        .side-card {
+            height: 250px; /* Altura fixa para os cartões laterais */
+        }
+
+        /* Estilo para as imagens dos cartões laterais */
+        .side-card .card-img-top {
+            height: 150px; /* Altura fixa para as imagens laterais */
+            width: 100%; /* Ajusta a largura para preencher o contêiner */
+        }
+
+        /* Estilo específico para os cartões de notícias */
+        .news-card {
+            display: flex; /* Garante que o conteúdo do cartão se comporte como um flex container */
+            flex-direction: column; /* Alinha o conteúdo do cartão verticalmente */
+            height: 300px; /* Altura fixa para os cartões de notícias */
+            overflow: hidden; /* Garante que o conteúdo não vaze fora do cartão */
+        }
+
+        .news-card .card-img-top {
+            height: 180px; /* Define a altura das imagens dentro dos cartões de notícias */
+            object-fit: cover; /* Faz com que a imagem cubra o contêiner sem distorção */
+        }
+
+        /* Remove a limitação de caracteres e exibe o título completo */
+        .card-title {
+            font-size: 0.9rem; /* Diminuí o tamanho da fonte dos títulos */
+            white-space: normal; /* Permite que o texto do título se quebre em várias linhas */
+            overflow: visible; /* Garante que o texto completo do título seja visível */
+        }
+
+        /* Garante que o botão "Read Full" fique sempre visível */
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <main class="container mt-3 mb-5">
+        <!-- featured news -->
+        <div class="row my-3">
+            <!-- Left -->
+            <div class="col-md-7">
+                <div class="card mb-3 main-card">
+                  <img src="/media/{{first_news.image}}" class="card-img-top" alt="{{first_news.title}}">
+                  <div class="card-body">
+                    <h5 class="card-title">{{first_news.title}}</h5>
+                    <hr/>
+                    <p class="card-text"><a href="/detail/{{first_news.id}}" class="btn btn-sm btn-primary">Read Full</a></p>
+                  </div>
+                </div>
+            </div>
+            <!-- Right -->
+            <div class="col-md-5" style="max-height: 450px; overflow: auto;">
+            {% for news in three_news %}
+                <!-- News Box -->
+                <div class="card mb-3 side-card">
+                  <div class="row no-gutters">
+                    <div class="col-md-4">
+                       <img src="/media/{{news.image}}" class="card-img-top" alt="{{news.title}}">
+                    </div>
+                    <div class="col-md-8">
+                      <div class="card-body">
+                        <h5 class="card-title">{{news.title}}</h5>
+                        <p class="card-text"><a href="/detail/{{news.id}}" class="btn btn-sm btn-primary">Read Full</a></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr/>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- Category Wise News -->
+        {% for category in three_categories %}
+        <h3 class="border-bottom pb-1"> {{category.title}} <a href="/category/{{category.id}}" 
+        class="float-right btn btn-sm btn-dark">Na mesma categoria</a></h3>
+        <div class="row my-4">
+            {% for news in category.news_set.all %}
+            {% if forloop.counter < 5 %}
+            <!-- News box -->
+            <div class="col-md-3">
+                <div class="card mb-3 shadow news-card">
+                    <img src="/media/{{news.image}}" class="card-img-top" alt="{{news.title}}">
+                  <div class="card-body">
+                    <h5 class="card-title">{{news.title}}</h5>
+                    <hr/>
+                    <p class="card-text"><a href="/detail/{{news.id}}" class="btn btn-sm btn-primary">Read Full</a></p>
+                  </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+         {% endfor %}
+        <!-- End Single Category -->
+    </main>
+</body>
+</html>
+{% endblock %}

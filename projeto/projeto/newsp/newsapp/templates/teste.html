@@ -1,0 +1,765 @@
+<div class="form-check">
+    <input class="form-check-input" type="checkbox" value="" name="remember_me" id="remember_me">
+    <label class="form-check-label text-secondary" for="remember_me">
+      Não tem uma conta? Registre-se já
+    </label>
+  </div>
+
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Faça seu cadastro</title>
+  </head>
+  <body>
+      <form action="{% url 'login' %}" method="POST">{% csrf_token %}
+          <input type="text" placeholder="Username. . ." name="username">
+          <br>
+          <br>
+          <input type="password" placeholder="Senha. . ." name="senha">
+          <hr>
+          <br>
+          <input type="submit" value="Logar">
+      </form>
+  
+  
+  </body>
+  </html>
+
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Faça seu cadastro</title>
+  </head>
+  <body>
+      <form action="{% url 'cadastro' %}" method="POST">{% csrf_token %}
+          <input type="text" placeholder="Username. . ." name="username">
+          <br>
+          <br>
+          <input type="email" placeholder="Email. . ." name="email">
+          <br>
+          <br>
+          <input type="password" placeholder="Senha. . ." name="senha">
+          <hr>
+          <br>
+          <input type="submit" value="Cadastrar">
+      </form>
+  
+  
+  </body>
+  </html>
+
+  
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+    Password Reset
+        </title>
+    </head>
+    <body>
+            <div>
+                <strong>Menu:</strong>
+                <ul>
+                            <li>
+                                <a href="/accounts/email/">Change Email</a>
+                            </li>
+                            <li>
+                                <a href="/accounts/password/change/">Change Password</a>
+                            </li>
+                            <li>
+                                <a href="/accounts/3rdparty/">Account Connection</a>
+                            </li>
+                            <li>
+                                <a href="/accounts/logout/">Sign Out</a>
+                            </li>
+                </ul>
+            </div>
+    <h1>
+        Password Reset
+    </h1>
+<p>
+    
+        <strong>Note:</strong> You are already logged in as admin.
+    
+</p>
+
+
+    
+    <p>
+        Forgotten your password? Enter your email address below, and we'll send you an email allowing you to reset it.
+    </p>
+
+    
+    
+<form method="post" action="/accounts/password/reset/">
+    
+            <input type="hidden" name="csrfmiddlewaretoken" value="sNei1aGMS5Vp4rEE6H0bCQCG2PrW0We2xY03ClRmOKdGTjoNQFow3itQR6KGfTEy">
+            <p>
+    <label for="id_email">Email:</label>
+    <input type="email" name="email" placeholder="Email address" autocomplete="email" maxlength="320" required id="id_email">
+  </p>
+<button
+type="submit"
+>
+
+                Redefinir e fazer log-in
+            
+</button> 
+</form>
+
+    <p>
+        Please contact us if you have any trouble resetting your password.
+    </p>
+    </body>
+</html>
+
+<form action="{% url 'index' %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
+
+    <input type="file" name="my_file">
+    <input type="submit" value="enviar">
+    <br>
+    <br>
+
+</form>
+
+STATIC_URL = 'static/'
+STATIC_ROOT = 'static'
+
+STATIC_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
+'django.contrib.staticfiles',
+
+<!-- templates/perfil.html -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil do Usuário</title>
+    <style>
+        body {
+            background-color: white;
+            color: black;
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        .content {
+            padding: 20px;
+        }
+        .comentarios {
+            margin-top: 20px;
+        }
+        .comentario {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Perfil de {{ perfil.user.username }}</h1>
+    </div>
+    <div class="content">
+        <h2>Últimos Comentários</h2>
+        <div class="comentarios">
+            {% for comentario in comentarios %}
+                <div class="comentario">
+                    <p><strong>Notícia:</strong> {{ comentario.news.title }}</p>
+                    <p>{{ comentario.comment }}</p>
+                    <p><small>{{ comentario.created_at }}</small></p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
+
+
+{% extends 'base.html' %}
+{% block content%}
+<main class="container mt-3 mb-5">
+	<!-- featured news -->
+	<div class="row my-3">
+		<!-- Left -->
+		<div class="col-md-8">
+			<div class="card mb-3">
+                 <img src="/media/{{news.image}}" class="card-img-top" alt="{{news.title}}">
+			  <div class="card-body">
+			    <h5 class="card-title">{{news.title}}</h5>
+			    <hr/>
+			    <p class="card-text">{{news.detail}}</p>
+			  </div>
+			  <div class="card-footer">
+			  	In <a href="/category/{{news.category.id}}">{{news.category.title}}</a>
+			  </div>
+			</div>
+
+			<!-- Comments -->
+			 
+			<div class="card my-4">
+				<h6 class="card-header">Add Comment</h6>
+				<div class="card-body">
+					{% for message in messages%}
+					<p class="text-success">{{message}}</p>
+					{% endfor %}
+					<form method="post" action="/detail/{{news.id}}">
+					{% csrf_token %}
+						<div class="form-group row">
+							<label class="col-md-2">Name<span class="text-danger">*</span></label>
+							<div class="col-md-10">
+								<input type="text" name="name" required class="form-control" />
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-md-2">Email<span class="text-danger">*</span></label>
+							<div class="col-md-10">
+								<input type="temailext" name="email" required class="form-control" />
+							</div>
+						</div>
+						<div class="form-group row">
+							<label class="col-md-2">Comment<span class="text-danger">*</span></label>
+							<div class="col-md-10">
+								<textarea class="form-control" name="message" required></textarea>
+							</div>
+						</div>
+						<input type="submit" class="btn btn-primary" />
+					</form>
+				</div>
+			</div>
+			<!-- Previous Comments -->
+			<div class="card my-4">
+				<h6 class="card-header">Comments</h6>
+				<div class="card-body">
+					{% for comment in comments %}
+					<blockquote class="blockquote text-right">
+					  <p class="mb-0">{{comment.comment}}</p>
+					  <footer class="blockquote-footer">{{comment.name}} <cite title="Source Title"> {{comment.email}}</cite></footer>
+					</blockquote>
+					<hr/>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+		<!-- Related News -->
+		<div class="col-md-4">
+			<h3 class="mb-3 border-bottom pb-1">From this Category</h3>
+			<!-- Category Box -->
+            {% for news in related_news %}
+			<div class="card mb-3 shadow">
+			    <img src="/media/{{news.image}}" class="card-img-top" alt="{{news.title}}">
+			  <div class="card-body">
+			    <h5 class="card-title">{{news.title}}</h5>
+			    <hr/> 
+			    <p class="card-text"><a href="/detail/{{news.id}}" class="btn btn-sm btn-primary">Read Full</a></p>
+			  </div>
+			</div>
+		{% endfor %}
+		</div>
+	</div>
+</main>
+{% endblock%}
+
+{% extends 'base.html' %}
+{% block content%}
+<main class="container mt-3 mb-5">
+	<h3 class="border-bottom pb-1 my-4">{{category.title}}</h3>
+	<!-- News Box -->
+    {% for news in all_news %}
+	<div class="card mb-4 shadow">
+	  <div class="row no-gutters">
+	    <div class="col-md-3">
+	      <img src="/media/{{news.image}}" class="card-img" alt="{{news.title}}">
+	    </div>
+	    <div class="col-md-8">
+	      <div class="card-body">
+	        <h5 class="card-title">{{news.title}}</h5>
+	        <p class="card-text">{{news.detail}}</p>
+	        <p class="card-text"><a href="/detail/{{news.id}}" class="btn btn-sm btn-primary">Read Full</a></p>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+{% endfor %}
+</main>
+{% endblock%}
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<style>
+		/* Estilo do container do texto "Read Full" */
+		.read-more-container {
+			position: relative;
+		}
+	
+		/* Inicialmente oculta o link */
+		.read-more-link {
+			display: none;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			background-color: #007bff;
+			color: white;
+			padding: 10px;
+			text-decoration: none;
+			border-radius: 0 0 4px 4px;
+		}
+	
+		/* Exibe o link quando o mouse está sobre a área do card */
+		.card:hover .read-more-link {
+			display: block;
+		}
+	
+		/* Adiciona estilo ao card para ter um efeito suave ao hover */
+		.card {
+			transition: transform 0.2s;
+		}
+	
+		.card:hover {
+			transform: scale(1.02);
+		}
+	
+		/* Garante que os links no card ocupem toda a área do card */
+		.card-body a, .card-img {
+			display: block;
+			text-decoration: none;
+			color: inherit;
+		}
+	
+		.card-body a:hover {
+			text-decoration: underline;
+		}
+	</style>
+	
+	<style>
+		/* Estilo do container do texto "Read Full" */
+		.read-more-container {
+			position: relative;
+		}
+	
+		/* Inicialmente oculta o link */
+		.read-more-link {
+			display: none;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			background-color: #007bff;
+			color: white;
+			padding: 10px;
+			text-decoration: none;
+			border-radius: 0 0 4px 4px;
+		}
+	
+		/* Exibe o link quando o mouse está sobre a área do card */
+		.card:hover .read-more-link {
+			display: block;
+		}
+	
+		/* Adiciona estilo ao card para ter um efeito suave ao hover */
+		.card {
+			transition: transform 0.2s;
+		}
+	
+		.card:hover {
+			transform: scale(1.02);
+		}
+	</style>
+	
+	<link rel="icon" href="{% static 'favicon.png' %}" type="image/png">
+	<title>{% block title %}Paulistana News{% endblock%}</title>
+	<!-- Bootstrap 4 CSS -->
+	<link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+	<link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.4/components/logins/login-10/assets/css/login-10.css">
+	<!-- Main Jquery -->
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<!-- Bootstrap Js -->
+	<script type="text/javascript" src="bootstrap.min.js"></script>
+</head>
+<body>
+	<!-- Top News -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+		<div class="container">
+		  <a class="navbar-brand" href="/">Paulistana News</a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="collapse navbar-collapse" id="navbarNav">
+		    <ul class="navbar-nav ml-auto">
+		      <li class="nav-item active">
+		        <a class="nav-link" href="/">Home</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="{% url 'all-news' %}">Todas as notícias</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="{% url 'all-category' %}">Categorias</a>
+		      <li>
+			  </li>
+			</li>
+		    </ul>
+		  </div>
+	  	</div>
+	</nav>
+
+{% block content %}
+{% endblock%}
+
+    <hr/>
+<footer class="text-muted">
+  <div class="container">
+    <p class="float-right">
+      <a href="#">Back to top</a>
+    </p>
+    <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
+    <p>New to Bootstrap? <a href="https://getbootstrap.com/">Visit the homepage</a> or read our <a href="/docs/4.5/getting-started/introduction/">getting started guide</a>.</p>
+  </div>
+</footer>
+</body>
+</html>
+
+## home
+
+{% extends 'base.html' %}
+{% block content%}
+<main class="container mt-3 mb-5">
+	<!-- featured news -->
+	<div class="row my-3">
+		<!-- Left -->
+		<div class="col-md-7">
+			<div class="card mb-3">
+			  <img src="/media/{{first_news.image}}" class="card-img-top" alt="{{first_news.title}}">
+			  <div class="card-body">
+			    <h5 class="card-title">{{first_news.title}}</h5>
+			    <hr/>
+			    <p class="card-text"><a href="/detail/{{first_news.id}}" class="btn btn-sm btn-primary">Read Full</a></p>
+			  </div>
+			</div>
+		</div>
+		<!-- Right -->
+		<div class="col-md-5" style="max-height: 450px; overflow: auto;">
+		{% for news in three_news %}
+			<!-- News Box -->
+			<div class="card">
+			  <div class="row no-gutters">
+			    <div class="col-md-4">
+			       <img src="/media/{{news.image}}" class="card-img-top" alt="{{news.title}}">
+			    </div>
+			    <div class="col-md-8">
+			      <div class="card-body">
+			        <h5 class="card-title">{{news.title}}</h5>
+			        <p class="card-text"><a href="/detail/{{news.id}}" class="btn btn-sm btn-primary">Read Full</a></p>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			<hr/>
+			{% endfor%}
+		</div>
+	</div>
+	<!-- Category Wise News -->
+	{% for category in three_categories %}
+	<h3 class="border-bottom pb-1"> {{category.title}} <a href="/category/{{category.id}}" 
+	class="float-right btn btn-sm btn-dark">In this Category</a></h3>
+	<div class="row my-4">
+		{% for news in category.news_set.all %}
+		{% if forloop.counter < 5 %}
+		<!-- News box -->
+		<div class="col-md-3">
+			<div class="card mb-3 shadow">
+		    	<img src="/media/{{news.image}}" class="card-img-top" alt="{{news.title}}">
+			  <div class="card-body">
+			    <h5 class="card-title">{{news.title}}</h5>
+			    <hr/>
+			    <p class="card-text"><a href="/detail/{{news.id}}" class="btn btn-sm btn-primary">Read Full</a></p>
+			  </div>
+			</div>
+		</div>
+		{% endif %}
+		{% endfor %}
+	</div>
+ {% endfor %}
+	<!-- End Single Category -->
+</main>
+{% endblock%}
+
+{% extends 'base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Estilo geral para os cartões */
+        .card {
+            display: flex; /* Garante que o conteúdo do cartão se comporte como um flex container */
+            flex-direction: column; /* Faz com que o conteúdo do cartão se empilhe verticalmente */
+            height: 300px; /* Define uma altura fixa para todos os cartões */
+            width: 100%; /* Ajusta a largura dos cartões para preencher o contêiner */
+            max-width: 400px; /* Define uma largura máxima para os cartões */
+            margin-bottom: 20px; /* Espaço inferior entre os cartões */
+            overflow: hidden; /* Garante que o conteúdo não vaze fora do cartão */
+            transition: transform 0.2s; /* Efeito de transição suave para o hover */
+        }
+
+        /* Efeito de hover para o cartão */
+        .card:hover {
+            transform: scale(1.02); /* Aumenta ligeiramente o tamanho do cartão ao passar o mouse */
+        }
+
+        /* Estilo para as imagens do cartão */
+        .card-img, .card-img-top {
+            width: 100%; /* Faz com que a imagem ocupe toda a largura do contêiner do cartão */
+            height: 180px; /* Define uma altura fixa para as imagens */
+            object-fit: cover; /* Faz com que a imagem cubra o contêiner sem distorção */
+        }
+
+        /* Estilo específico para os cartões de notícias com layout de 3:4 */
+        .news-card {
+            display: flex; /* Garante que o conteúdo do cartão se comporte como um flex container */
+            flex-direction: row; /* Alinha o conteúdo do cartão horizontalmente */
+            height: 100%; /* Garante que todos os cartões tenham a mesma altura */
+            overflow: hidden; /* Garante que o conteúdo não vaze fora do cartão */
+        }
+
+        .news-card .card-img {
+            height: 100%; /* Faz com que a imagem ocupe toda a altura do contêiner do cartão */
+            width: 120px; /* Define uma largura fixa para as imagens dentro dos cartões de notícias */
+            object-fit: cover; /* Faz com que a imagem cubra o contêiner sem distorção */
+        }
+
+        .news-card .card-body {
+            display: flex;
+            flex-direction: column; /* Faz com que o conteúdo do corpo do cartão se empilhe verticalmente */
+            justify-content: space-between; /* Garante que o conteúdo ocupe todo o espaço disponível */
+            padding: 15px; /* Espaçamento interno do corpo do cartão */
+        }
+
+        .card-title {
+            font-size: 16px; /* Define o tamanho da fonte para os títulos das notícias */
+        }
+    </style>
+</head>
+<body>
+    <main class="container mt-3 mb-5">
+        <!-- featured news -->
+        <div class="row my-3">
+            <!-- Left -->
+            <div class="col-md-7">
+                <div class="card mb-3">
+                  <img src="/media/{{first_news.image}}" class="card-img-top" alt="{{first_news.title}}">
+                  <div class="card-body">
+                    <h5 class="card-title">{{first_news.title}}</h5>
+                    <hr/>
+                    <p class="card-text"><a href="/detail/{{first_news.id}}" class="btn btn-sm btn-primary">Read Full</a></p>
+                  </div>
+                </div>
+            </div>
+            <!-- Right -->
+            <div class="col-md-5" style="max-height: 450px; overflow: auto;">
+            {% for news in three_news %}
+                <!-- News Box -->
+                <div class="card mb-3 news-card">
+                  <div class="row no-gutters">
+                    <div class="col-md-4">
+                       <img src="/media/{{news.image}}" class="card-img" alt="{{news.title}}">
+                    </div>
+                    <div class="col-md-8">
+                      <div class="card-body">
+                        <h5 class="card-title">{{news.title}}</h5>
+                        <p class="card-text"><a href="/detail/{{news.id}}" class="btn btn-sm btn-primary">Read Full</a></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr/>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- Category Wise News -->
+        {% for category in three_categories %}
+        <h3 class="border-bottom pb-1"> {{category.title}} <a href="/category/{{category.id}}" 
+        class="float-right btn btn-sm btn-dark">In this Category</a></h3>
+        <div class="row my-4">
+            {% for news in category.news_set.all %}
+            {% if forloop.counter < 5 %}
+            <!-- News box -->
+            <div class="col-md-3">
+                <div class="card mb-3 shadow news-card">
+                    <img src="/media/{{news.image}}" class="card-img" alt="{{news.title}}">
+                  <div class="card-body">
+                    <h5 class="card-title">{{news.title}}</h5>
+                    <hr/>
+                    <p class="card-text"><a href="/detail/{{news.id}}" class="btn btn-sm btn-primary">Read Full</a></p>
+                  </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+         {% endfor %}
+        <!-- End Single Category -->
+    </main>
+</body>
+</html>
+{% endblock %}
+
+{% extends 'base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Estilo geral para os cartões */
+        .card {
+            display: flex; /* Garante que o conteúdo do cartão se comporte como um flex container */
+            flex-direction: column; /* Faz com que o conteúdo do cartão se empilhe verticalmente */
+            height: 300px; /* Define uma altura fixa para todos os cartões */
+            width: 100%; /* Ajusta a largura dos cartões para preencher o contêiner */
+            max-width: 400px; /* Define uma largura máxima para os cartões */
+            margin-bottom: 20px; /* Espaço inferior entre os cartões */
+            overflow: hidden; /* Garante que o conteúdo não vaze fora do cartão */
+            transition: transform 0.2s; /* Efeito de transição suave para o hover */
+        }
+
+        /* Efeito de hover para o cartão */
+        .card:hover {
+            transform: scale(1.02); /* Aumenta ligeiramente o tamanho do cartão ao passar o mouse */
+        }
+
+        /* Estilo para as imagens do cartão */
+        .card-img, .card-img-top {
+            width: 100%; /* Faz com que a imagem ocupe toda a largura do contêiner do cartão */
+            object-fit: cover; /* Faz com que a imagem cubra o contêiner sem distorção */
+        }
+
+        /* Estilo para o cartão principal */
+        .main-card {
+            height: 450px; /* Altura maior para o cartão principal */
+        }
+
+        /* Estilo para a imagem do cartão principal */
+        .main-card .card-img-top {
+            height: 300px; /* Altura fixa para a imagem principal */
+        }
+
+        /* Estilo para os cartões laterais */
+        .side-card {
+            height: 250px; /* Altura fixa para os cartões laterais */
+        }
+
+        /* Estilo para as imagens dos cartões laterais */
+        .side-card .card-img-top {
+            height: 150px; /* Altura fixa para as imagens laterais */
+            width: 100%; /* Ajusta a largura para preencher o contêiner */
+        }
+
+        /* Estilo específico para os cartões de notícias */
+        .news-card {
+            display: flex; /* Garante que o conteúdo do cartão se comporte como um flex container */
+            flex-direction: column; /* Alinha o conteúdo do cartão verticalmente */
+            height: 300px; /* Altura fixa para os cartões de notícias */
+            overflow: hidden; /* Garante que o conteúdo não vaze fora do cartão */
+        }
+
+        .news-card .card-img-top {
+            height: 180px; /* Define a altura das imagens dentro dos cartões de notícias */
+            object-fit: cover; /* Faz com que a imagem cubra o contêiner sem distorção */
+        }
+
+        /* Remove a limitação de caracteres e exibe o título completo */
+        .card-title {
+            font-size: 0.9rem; /* Diminuí o tamanho da fonte dos títulos */
+            white-space: normal; /* Permite que o texto do título se quebre em várias linhas */
+            overflow: visible; /* Garante que o texto completo do título seja visível */
+        }
+
+        /* Garante que o botão "Read Full" fique sempre visível */
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <main class="container mt-3 mb-5">
+        <!-- featured news -->
+        <div class="row my-3">
+            <!-- Left -->
+            <div class="col-md-7">
+                <div class="card mb-3 main-card">
+                  <img src="/media/{{first_news.image}}" class="card-img-top" alt="{{first_news.title}}">
+                  <div class="card-body">
+                    <h5 class="card-title">{{first_news.title}}</h5>
+                    <hr/>
+                    <p class="card-text"><a href="/detail/{{first_news.id}}" class="btn btn-sm btn-primary">Read Full</a></p>
+                  </div>
+                </div>
+            </div>
+            <!-- Right -->
+            <div class="col-md-5" style="max-height: 450px; overflow: auto;">
+            {% for news in three_news %}
+                <!-- News Box -->
+                <div class="card mb-3 side-card">
+                  <div class="row no-gutters">
+                    <div class="col-md-4">
+                       <img src="/media/{{news.image}}" class="card-img-top" alt="{{news.title}}">
+                    </div>
+                    <div class="col-md-8">
+                      <div class="card-body">
+                        <h5 class="card-title">{{news.title}}</h5>
+                        <p class="card-text"><a href="/detail/{{news.id}}" class="btn btn-sm btn-primary">Read Full</a></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr/>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- Category Wise News -->
+        {% for category in three_categories %}
+        <h3 class="border-bottom pb-1"> {{category.title}} <a href="/category/{{category.id}}" 
+        class="float-right btn btn-sm btn-dark">In this Category</a></h3>
+        <div class="row my-4">
+            {% for news in category.news_set.all %}
+            {% if forloop.counter < 5 %}
+            <!-- News box -->
+            <div class="col-md-3">
+                <div class="card mb-3 shadow news-card">
+                    <img src="/media/{{news.image}}" class="card-img-top" alt="{{news.title}}">
+                  <div class="card-body">
+                    <h5 class="card-title">{{news.title}}</h5>
+                    <hr/>
+                    <p class="card-text"><a href="/detail/{{news.id}}" class="btn btn-sm btn-primary">Read Full</a></p>
+                  </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+         {% endfor %}
+        <!-- End Single Category -->
+    </main>
+</body>
+</html>
+{% endblock %}

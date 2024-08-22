@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitação de Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        p {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+        .buttons a {
+            text-decoration: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .login-btn {
+            background-color: #007bff;
+        }
+        .login-btn:hover {
+            background-color: #0056b3;
+        }
+        .signup-btn {
+            background-color: #28a745;
+        }
+        .signup-btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Bem-vindo!</h2>
+        <p>Por favor, crie uma conta para ter acesso a sua página de perfil.</p>
+        <div class="buttons">
+            <a href="{% url 'login' %}" class="login-btn">Já tenho conta - Entrar</a>
+            <a href="{% url 'cadastro' %}" class="signup-btn">Criar conta - Cadastro</a>
+        </div>
+    </div>
+</body>
+</html>

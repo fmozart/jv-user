@@ -1,0 +1,630 @@
+
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+  <head><script src="/docs/5.3/assets/js/color-modes.js"></script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.122.0">
+    <title>Signin Template · Bootstrap v5.3</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sign-in/">
+
+    
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+
+<link href="/docs/5.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Favicons -->
+<link rel="apple-touch-icon" href="/docs/5.3/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+<link rel="icon" href="/docs/5.3/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/docs/5.3/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="manifest" href="/docs/5.3/assets/img/favicons/manifest.json">
+<link rel="mask-icon" href="/docs/5.3/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
+<link rel="icon" href="/docs/5.3/assets/img/favicons/favicon.ico">
+<meta name="theme-color" content="#712cf9">
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .b-example-divider {
+        width: 100%;
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .btn-bd-primary {
+        --bd-violet-bg: #712cf9;
+        --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+        --bs-btn-font-weight: 600;
+        --bs-btn-color: var(--bs-white);
+        --bs-btn-bg: var(--bd-violet-bg);
+        --bs-btn-border-color: var(--bd-violet-bg);
+        --bs-btn-hover-color: var(--bs-white);
+        --bs-btn-hover-bg: #6528e0;
+        --bs-btn-hover-border-color: #6528e0;
+        --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+        --bs-btn-active-color: var(--bs-btn-hover-color);
+        --bs-btn-active-bg: #5a23c8;
+        --bs-btn-active-border-color: #5a23c8;
+      }
+
+      .bd-mode-toggle {
+        z-index: 1500;
+      }
+
+      .bd-mode-toggle .dropdown-menu .active .bi {
+        display: block !important;
+      }
+    </style>
+
+    
+    <!-- Custom styles for this template -->
+    <link href="sign-in.css" rel="stylesheet">
+  </head>
+  <body class="d-flex align-items-center py-4 bg-body-tertiary">
+    <form action="{% url 'login' %}" method="POST">{% csrf_token %}
+    <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+      <symbol id="check2" viewBox="0 0 16 16">
+        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+      </symbol>
+      <symbol id="circle-half" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+      </symbol>
+      <symbol id="moon-stars-fill" viewBox="0 0 16 16">
+        <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+        <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/>
+      </symbol>
+      <symbol id="sun-fill" viewBox="0 0 16 16">
+        <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+      </symbol>
+    </svg>
+
+    <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
+      <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
+              id="bd-theme"
+              type="button"
+              aria-expanded="false"
+              data-bs-toggle="dropdown"
+              aria-label="Toggle theme (auto)">
+        <svg class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#circle-half"></use></svg>
+        <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
+        <li>
+          <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+            <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#sun-fill"></use></svg>
+            Light
+            <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+            <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#moon-stars-fill"></use></svg>
+            Dark
+            <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
+            <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#circle-half"></use></svg>
+            Auto
+            <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    
+<main class="form-signin w-100 m-auto">
+  <form>
+    <img class="mb-4" src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+    <div class="form-floating">
+      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+      <label for="floatingInput">Email address</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+      <label for="floatingPassword">Password</label>
+    </div>
+
+    <div class="form-check text-start my-3">
+      <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
+      <label class="form-check-label" for="flexCheckDefault">
+        Remember me
+      </label>
+    </div>
+    <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+    <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2024</p>
+  </form>
+</main>
+<script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    </body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faça seu cadastro</title>
+</head>
+<body>
+    <form action="{% url 'login' %}" method="POST">{% csrf_token %}
+        <input type="text" placeholder="Username. . ." name="username">
+        <br>
+        <br>
+        <input type="password" placeholder="Senha. . ." name="senha">
+        <hr>
+        <br>
+        <input type="submit" value="Logar">
+    </form>
+
+
+</body>
+</html>
+
+..
+<!-- Pills navs -->
+<ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+  <li class="nav-item" role="presentation">
+    <a class="nav-link active" id="tab-login" data-mdb-pill-init href="#pills-login" role="tab"
+      aria-controls="pills-login" aria-selected="true">Login</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="tab-register" data-mdb-pill-init href="#pills-register" role="tab"
+      aria-controls="pills-register" aria-selected="false">Register</a>
+  </li>
+</ul>
+<!-- Pills navs -->
+
+<!-- Pills content -->
+<div class="tab-content">
+  <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
+    <form>
+      <div class="text-center mb-3">
+        <p>Sign in with:</p>
+        <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
+          <i class="fab fa-facebook-f"></i>
+        </button>
+
+        <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
+          <i class="fab fa-google"></i>
+        </button>
+
+        <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
+          <i class="fab fa-twitter"></i>
+        </button>
+
+        <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
+          <i class="fab fa-github"></i>
+        </button>
+      </div>
+
+      <p class="text-center">or:</p>
+
+      <!-- Email input -->
+      <div data-mdb-input-init class="form-outline mb-4">
+        <input type="email" id="loginName" class="form-control" />
+        <label class="form-label" for="loginName">Email or username</label>
+      </div>
+
+      <!-- Password input -->
+      <div data-mdb-input-init class="form-outline mb-4">
+        <input type="password" id="loginPassword" class="form-control" />
+        <label class="form-label" for="loginPassword">Password</label>
+      </div>
+
+      <!-- 2 column grid layout -->
+      <div class="row mb-4">
+        <div class="col-md-6 d-flex justify-content-center">
+          <!-- Checkbox -->
+          <div class="form-check mb-3 mb-md-0">
+            <input class="form-check-input" type="checkbox" value="" id="loginCheck" checked />
+            <label class="form-check-label" for="loginCheck"> Remember me </label>
+          </div>
+        </div>
+
+        <div class="col-md-6 d-flex justify-content-center">
+          <!-- Simple link -->
+          <a href="#!">Forgot password?</a>
+        </div>
+      </div>
+
+      <!-- Submit button -->
+      <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">Sign in</button>
+
+      <!-- Register buttons -->
+      <div class="text-center">
+        <p>Not a member? <a href="#!">Register</a></p>
+      </div>
+    </form>
+  </div>
+  <div class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
+    <form>
+      <div class="text-center mb-3">
+        <p>Sign up with:</p>
+        <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
+          <i class="fab fa-facebook-f"></i>
+        </button>
+
+        <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
+          <i class="fab fa-google"></i>
+        </button>
+
+        <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
+          <i class="fab fa-twitter"></i>
+        </button>
+
+        <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
+          <i class="fab fa-github"></i>
+        </button>
+      </div>
+
+      <p class="text-center">or:</p>
+
+      <!-- Name input -->
+      <div data-mdb-input-init class="form-outline mb-4">
+        <input type="text" id="registerName" class="form-control" />
+        <label class="form-label" for="registerName">Name</label>
+      </div>
+
+      <!-- Username input -->
+      <div data-mdb-input-init class="form-outline mb-4">
+        <input type="text" id="registerUsername" class="form-control" />
+        <label class="form-label" for="registerUsername">Username</label>
+      </div>
+
+      <!-- Email input -->
+      <div data-mdb-input-init class="form-outline mb-4">
+        <input type="email" id="registerEmail" class="form-control" />
+        <label class="form-label" for="registerEmail">Email</label>
+      </div>
+
+      <!-- Password input -->
+      <div data-mdb-input-init class="form-outline mb-4">
+        <input type="password" id="registerPassword" class="form-control" />
+        <label class="form-label" for="registerPassword">Password</label>
+      </div>
+
+      <!-- Repeat Password input -->
+      <div data-mdb-input-init class="form-outline mb-4">
+        <input type="password" id="registerRepeatPassword" class="form-control" />
+        <label class="form-label" for="registerRepeatPassword">Repeat password</label>
+      </div>
+
+      <!-- Checkbox -->
+      <div class="form-check d-flex justify-content-center mb-4">
+        <input class="form-check-input me-2" type="checkbox" value="" id="registerCheck" checked
+          aria-describedby="registerCheckHelpText" />
+        <label class="form-check-label" for="registerCheck">
+          I have read and agree to the terms
+        </label>
+      </div>
+
+      <!-- Submit button -->
+      <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-3">Sign in</button>
+    </form>
+  </div>
+</div>
+<!-- Pills content -->
+
+https://bootstrapbrain.com/demo/components/logins/login-10/#!
+
+<div class="col-12">
+                  <div class="form-floating mb-3">
+                    <input type="email" class="form-control" placeholder="Email. . ." name="email">
+                    <label for="email" class="form-label">Email</label>
+                  </div>
+
+return HttpResponse('cadastrado com sucesso!')
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Reset</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        p {
+            margin-bottom: 15px;
+            color: #666;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .menu {
+            margin-bottom: 20px;
+        }
+        .menu ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .menu li {
+            margin-bottom: 10px;
+        }
+        .menu a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        .menu a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="menu">
+            <strong>Menu:</strong>
+            <ul>
+                <li><a href="/accounts/email/">Change Email</a></li>
+                <li><a href="/accounts/password/change/">Change Password</a></li>
+                <li><a href="/accounts/3rdparty/">Account Connection</a></li>
+                <li><a href="/accounts/logout/">Sign Out</a></li>
+            </ul>
+        </div>
+        <h1>Password Reset</h1>
+        <p><strong>Note:</strong> You are already logged in as admin.</p>
+        <p>Forgotten your password? Enter your email address below, and we'll send you an email allowing you to reset it.</p>
+        <form method="post" action="/accounts/password/reset/">
+            <input type="hidden" name="csrfmiddlewaretoken" value="sNei1aGMS5Vp4rEE6H0bCQCG2PrW0We2xY03ClRmOKdGTjoNQFow3itQR6KGfTEy">
+            <p>
+                <label for="id_email">Email:</label>
+                <input type="email" name="email" placeholder="Email address" autocomplete="email" maxlength="320" required id="id_email">
+            </p>
+            <button type="submit">Redefinir e fazer log-in</button>
+        </form>
+        <p>Please contact us if you have any trouble resetting your password.</p>
+    </div>
+</body>
+</html>
+
+STATIC_ROOT = 'staticfiles'
+
+"{% static 'template/vendor/bs4/bootstrap.min.css ' %}"
+
+<link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.4/components/logins/login-10/assets/css/login-10.css">
+
+    elif request.method == "POST":
+        file = request.FILES.get("my_file")
+        
+        img = Image.open(file)
+        path = os.path.join(settings.BASE_DIR, f'media/{file.name}-{date.today()}.png')
+        img = img.save(path)
+
+
+        print(file)
+
+        return HttpResponse('teste')
+
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            
+    Password Reset
+
+        </title>
+        
+        
+    </head>
+    <body>
+        
+            
+            <div>
+                <strong>Menu:</strong>
+                <ul>
+                    
+                        
+                        
+                            <li>
+                                <a href="/accounts/email/">Change Email</a>
+                            </li>
+                        
+                        
+                        
+                            <li>
+                                <a href="/accounts/password/change/">Change Password</a>
+                            </li>
+                        
+                        
+                        
+                            <li>
+                                <a href="/accounts/3rdparty/">Account Connection</a>
+                            </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                            <li>
+                                <a href="/accounts/logout/">Sign Out</a>
+                            </li>
+                        
+                    
+                </ul>
+            </div>
+            
+    <h1>
+        Password Reset
+    </h1>
+
+    
+        
+
+
+
+
+<p>
+    
+        <strong>Note:</strong> You are already logged in as admin.
+    
+</p>
+
+
+    
+    <p>
+        Forgotten your password? Enter your email address below, and we'll send you an email allowing you to reset it.
+    </p>
+
+    
+    
+<form method="post" action="/accounts/password/reset/">
+    
+            <input type="hidden" name="csrfmiddlewaretoken" value="sNei1aGMS5Vp4rEE6H0bCQCG2PrW0We2xY03ClRmOKdGTjoNQFow3itQR6KGfTEy">
+            <p>
+    <label for="id_email">Email:</label>
+    <input type="email" name="email" placeholder="Email address" autocomplete="email" maxlength="320" required id="id_email">
+    
+    
+      
+    
+  </p>
+
+        
+    
+            
+
+<button
+
+
+
+
+type="submit"
+
+>
+
+                Reset My Password
+            
+</button>
+
+        
+</form>
+
+    <p>
+        Please contact us if you have any trouble resetting your password.
+    </p>
+
+
+        
+        
+        
+    </body>
+</html>
+
+@login_required
+def perfil(request):
+    user = request.user
+    try:
+        perfil = Perfil.objects.get(user=user)
+    except Perfil.DoesNotExist:
+        return render(request, 'ci.html')
+
+    comentarios = Comment.objects.filter(email=user.email).order_by('-created_at')  # Ordena por data, mais recentes primeiro
+
+    return render(request, 'perfil.html', {'perfil': perfil, 'comentarios': comentarios})
